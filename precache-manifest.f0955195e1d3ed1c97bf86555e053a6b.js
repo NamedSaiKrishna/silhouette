@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "df294109151f2c1c076e128e4f51fd38",
+    "revision": "c1ac44e8c55a0b7e4b92a0544d776bf3",
     "url": "/silhouette/index.html"
   },
   {
-    "revision": "2d2f65bc88fae69c69fd",
+    "revision": "915f31da40fd58c6e3f1",
     "url": "/silhouette/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/silhouette/static/js/2.abd0eb31.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2d2f65bc88fae69c69fd",
-    "url": "/silhouette/static/js/main.9eb373b4.chunk.js"
+    "revision": "915f31da40fd58c6e3f1",
+    "url": "/silhouette/static/js/main.965be162.chunk.js"
   },
   {
     "revision": "16be2b879eeb18f6c86f",
