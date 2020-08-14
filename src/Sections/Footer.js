@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
+import Avatar from "@material-ui/core/Avatar";
 //MUI Icons
 import TwitterIcon from "@material-ui/icons/Twitter";
 import GitHubIcon from "@material-ui/icons/GitHub";
@@ -28,30 +29,24 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginTop: theme.spacing(5),
   },
-  typo: {
-    color: "white",
-  },
-  icon: {
-    color: "white",
-  },
 }));
 
 const pages = [
   {
     href: "https://twitter.com/namedsaikrishna",
-    icon: <TwitterIcon fontSize="large" />,
+    icon: <TwitterIcon fontSize="large" color="primary" />,
   },
   {
     href: "https://github.com/namedsaikrishna",
-    icon: <GitHubIcon fontSize="large" />,
+    icon: <GitHubIcon fontSize="large" color="primary" />,
   },
   {
     href: "https://www.instagram.com/namedsaikrishna",
-    icon: <InstagramIcon fontSize="large" />,
+    icon: <InstagramIcon fontSize="large" color="primary" />,
   },
   {
     href: "#",
-    icon: <LinkedInIcon fontSize="large" />,
+    icon: <LinkedInIcon fontSize="large" color="primary" />,
   },
 ];
 

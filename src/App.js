@@ -9,13 +9,11 @@ import { Navbar, Footer, Contact } from "./Sections";
 const App = () => {
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <Container maxWidth="md">
-          <Contact />
-          <Footer />
-        </Container>
-      </ThemeProvider>
+      <Navbar />
+      <Container maxWidth="md">
+        <Contact />
+        <Footer />
+      </Container>
     </div>
   );
 };
