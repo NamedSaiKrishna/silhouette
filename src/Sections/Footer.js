@@ -1,69 +1,93 @@
-import React from "react";
+import React, { useEffect } from "react";
 //MUI
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
-import Avatar from "@material-ui/core/Avatar";
 //MUI Icons
+import LaunchIcon from "@material-ui/icons/Launch";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
+//Redux
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getHandles } from "../redux/DataActions";
 
 function Copyright() {
   return (
-    <div>
+    <Typography variant="body2">
       {"Copyright © "}
       {new Date().getFullYear()}
       {" All rights reserved | "}
       <Link color="inherit" href="https://namedsaikrishna.github.io/silhouette">
         Sai Krishna Konda.
       </Link>
-    </div>
+    </Typography>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-  footer: {
+  section: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(4),
     textAlign: "center",
-    marginTop: theme.spacing(5),
+  },
+  element: {
+    marginBottom: theme.spacing(2),
   },
 }));
 
-const pages = [
-  {
-    href: "https://twitter.com/namedsaikrishna",
-    icon: <TwitterIcon fontSize="large" color="primary" />,
-  },
-  {
-    href: "https://github.com/namedsaikrishna",
-    icon: <GitHubIcon fontSize="large" color="primary" />,
-  },
-  {
-    href: "https://www.instagram.com/namedsaikrishna",
-    icon: <InstagramIcon fontSize="large" color="primary" />,
-  },
-  {
-    href: "#",
-    icon: <LinkedInIcon fontSize="large" color="primary" />,
-  },
-];
+function iconFunc(h) {
+  switch (h.name) {
+    case "twitter": {
+      return <TwitterIcon fontSize="large" color="primary" />;
+    }
+    case "github": {
+      return <GitHubIcon fontSize="large" color="primary" />;
+    }
+    case "instagram": {
+      return <InstagramIcon fontSize="large" color="primary" />;
+    }
+    case "linkedin": {
+      return <LinkedInIcon fontSize="large" color="primary" />;
+    }
+    default: {
+      return <LaunchIcon fontSize="large" color="primary" />;
+    }
+  }
+}
 
-const Footer = () => {
+const Footer = (props) => {
+  const { getHandles, handles } = props;
+  useEffect(() => {
+    getHandles();
+  }, [getHandles]);
   const classes = useStyles();
   return (
-    <div className={classes.footer}>
-      <Typography variant="body2" className={classes.typo}>
+    <div className={classes.section}>
+      <div className={classes.element}>
         <Copyright />
-      </Typography>
-      {pages.map((page) => (
-        <IconButton href={page.href} className={classes.icon} target="_blank">
-          {page.icon}
+      </div>
+      {handles.map((handle, i) => (
+        <IconButton href={handle.site_link} target="_blank" key={i}>
+          {iconFunc(handle)}
         </IconButton>
       ))}
     </div>
   );
 };
+Footer.propTypes = {
+  handles: PropTypes.array.isRequired,
+  getHandles: PropTypes.func.isRequired,
+};
 
-export default Footer;
+const mapStateToProps = (state) => ({
+  handles: state.data.handles,
+});
+const mapDispatchToProps = {
+  getHandles,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);
