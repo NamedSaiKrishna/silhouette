@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/silhouette/static/css/main.1a39050f.chunk.css",
+    "main.css": "/silhouette/static/css/main.fa2afbe4.chunk.css",
     "main.js": "/silhouette/static/js/main.3f8ef282.chunk.js",
     "main.js.map": "/silhouette/static/js/main.3f8ef282.chunk.js.map",
     "runtime-main.js": "/silhouette/static/js/runtime-main.63ee9eb0.js",
@@ -8,15 +8,15 @@
     "static/js/2.56c1f8c1.chunk.js": "/silhouette/static/js/2.56c1f8c1.chunk.js",
     "static/js/2.56c1f8c1.chunk.js.map": "/silhouette/static/js/2.56c1f8c1.chunk.js.map",
     "index.html": "/silhouette/index.html",
-    "precache-manifest.9f22c863aac46cd2355ae8ea502961c7.js": "/silhouette/precache-manifest.9f22c863aac46cd2355ae8ea502961c7.js",
+    "precache-manifest.e6b5b61e7245dcf27d300b1b594652fc.js": "/silhouette/precache-manifest.e6b5b61e7245dcf27d300b1b594652fc.js",
     "service-worker.js": "/silhouette/service-worker.js",
-    "static/css/main.1a39050f.chunk.css.map": "/silhouette/static/css/main.1a39050f.chunk.css.map",
+    "static/css/main.fa2afbe4.chunk.css.map": "/silhouette/static/css/main.fa2afbe4.chunk.css.map",
     "static/js/2.56c1f8c1.chunk.js.LICENSE.txt": "/silhouette/static/js/2.56c1f8c1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.63ee9eb0.js",
     "static/js/2.56c1f8c1.chunk.js",
-    "static/css/main.1a39050f.chunk.css",
+    "static/css/main.fa2afbe4.chunk.css",
     "static/js/main.3f8ef282.chunk.js"
   ]
 }
