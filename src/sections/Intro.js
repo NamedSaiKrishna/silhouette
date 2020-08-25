@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import "../index.css";
+import Skeleton from "@material-ui/lab/Skeleton";
+
 //Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -47,27 +49,34 @@ const Intro = (props) => {
     getBackgroundPicture,
     user_detail,
     background_picture,
+    loading,
   } = props;
   useEffect(() => {
     getUserDetails();
     getBackgroundPicture();
   }, [getUserDetails, getBackgroundPicture]);
   return (
-    <div
-      id="home"
-      className={classes.heroImage}
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),url(${background_picture.image})`,
-      }}
-    >
-      <div className={classes.heroText}>
-        <Typography variant="h3" className={classes.firstFont}>
-          Hello, I'm
-        </Typography>
-        <Typography variant="h2" className={classes.secondFont}>
-          {user_detail.name}
-        </Typography>
-      </div>
+    <div>
+      {loading ? (
+        <Skeleton variant="rect" className={classes.heroImage} />
+      ) : (
+        <div
+          id="home"
+          className={classes.heroImage}
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),url(${background_picture.image})`,
+          }}
+        >
+          <div className={classes.heroText}>
+            <Typography variant="h3" className={classes.firstFont}>
+              Hello, I'm
+            </Typography>
+            <Typography variant="h2" className={classes.secondFont}>
+              {user_detail.name}
+            </Typography>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -81,6 +90,7 @@ Intro.propTypes = {
 const mapStateToProps = (state) => ({
   user_detail: state.data.user_detail,
   background_picture: state.data.bacground_picture,
+  loading: state.data.loading,
 });
 const mapDispatchToProps = {
   getBackgroundPicture,
