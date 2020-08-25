@@ -138,7 +138,7 @@ const Contact = (props) => {
             </Alert>
           )}
         </Grid>
-        <Grid item sm={4}>
+        <Grid item sm={4} xs={12}>
           <Typography variant="h6" className={classes.title}>
             My Contact Details
           </Typography>

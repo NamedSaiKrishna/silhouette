@@ -48,7 +48,7 @@ const AboutMe = (props) => {
   return (
     <div className={classes.section} id="about">
       <Grid container spacing={3}>
-        <Grid item sm={6}>
+        <Grid item sm={6} xs={12}>
           {loading ? (
             <Skeleton variant="rect" height={400} />
           ) : (
@@ -63,7 +63,7 @@ const AboutMe = (props) => {
             </div>
           )}
         </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={6} xs={12}>
           <div className={classes.mainTitle}>
             <Typography variant="h4" className={classes.firstFont}>
               About
