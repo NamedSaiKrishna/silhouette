@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -8,7 +8,6 @@ import Skeleton from "@material-ui/lab/Skeleton";
 //Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getUserDetails, getBackgroundPicture } from "../redux/DataActions";
 
 const useStyles = makeStyles((theme) => ({
   heroImage: {
@@ -45,16 +44,9 @@ const useStyles = makeStyles((theme) => ({
 const Intro = (props) => {
   const classes = useStyles();
   const {
-    getUserDetails,
-    getBackgroundPicture,
-    user_detail,
-    background_picture,
+    profile: { background_picture, user_detail },
     loading,
   } = props;
-  useEffect(() => {
-    getUserDetails();
-    getBackgroundPicture();
-  }, [getUserDetails, getBackgroundPicture]);
   return (
     <div>
       {loading ? (
@@ -81,19 +73,13 @@ const Intro = (props) => {
   );
 };
 Intro.propTypes = {
-  user_detail: PropTypes.object.isRequired,
-  background_picture: PropTypes.object.isRequired,
-  getBackgroundPicture: PropTypes.func.isRequired,
-  getUserDetails: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user_detail: state.data.user_detail,
-  background_picture: state.data.bacground_picture,
+  profile: state.data.profile,
   loading: state.data.loading,
 });
-const mapDispatchToProps = {
-  getBackgroundPicture,
-  getUserDetails,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Intro);
+
+export default connect(mapStateToProps)(Intro);

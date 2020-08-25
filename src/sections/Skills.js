@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Avatar from "@material-ui/core/Avatar";
+
 //Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getSkills } from "../redux/DataActions";
 
 //Component
 import Grid from "@material-ui/core/Grid";
@@ -48,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Skills = (props) => {
   const classes = useStyles();
-  const { getSkills, skills } = props;
-  useEffect(() => {
-    getSkills();
-  }, [getSkills]);
+  const {
+    profile: { skills },
+    loading,
+  } = props;
   return (
     <div className={classes.section} id="skills">
       <div className={classes.mainTitle}>
@@ -65,30 +67,37 @@ const Skills = (props) => {
       <Paper className={classes.paper}>
         <div className={classes.skill}>
           <Grid container justify="center" spacing={3}>
-            {skills.map((skill, i) => (
-              <Grid item sm={2} key={i}>
-                <div className="image-wrapper">
-                  <img src={skill.image} alt="pic" className="image" />
-                  <Typography>{skill.name}</Typography>
-                </div>
-              </Grid>
-            ))}
+            {loading
+              ? [...Array(5)].map((a, i) => (
+                  <Grid item sm={2} key={i}>
+                    <Skeleton variant="circle">
+                      <Avatar className="image" />
+                    </Skeleton>
+                  </Grid>
+                ))
+              : skills.map((skill, i) => (
+                  <Grid item sm={2} key={i}>
+                    <div className="image-wrapper">
+                      <img src={skill.image} alt="pic" className="image" />
+                      <Typography>{skill.name}</Typography>
+                    </div>
+                  </Grid>
+                ))}
           </Grid>
         </div>
       </Paper>
     </div>
   );
 };
+
 Skills.propTypes = {
-  skills: PropTypes.array.isRequired,
-  getSkills: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  skills: state.data.skills,
+  profile: state.data.profile,
+  loading: state.data.loading,
 });
-const mapDispatchToProps = {
-  getSkills,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Skills);
+export default connect(mapStateToProps)(Skills);

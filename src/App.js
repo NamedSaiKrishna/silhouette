@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 //MUI
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,20 +9,21 @@ import Container from "@material-ui/core/Container";
 
 //Components
 import {
-  Footer,
-  Contact,
-  Skills,
-  AboutMe,
-  Resume,
-  Projects,
   Intro,
   Navbar,
+  Projects,
+  Resume,
+  AboutMe,
+  Skills,
+  Contact,
+  Footer,
 } from "./sections";
 import Sidebar from "./components/Sidebar";
 
 //Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { getProfile } from "./redux/DataActions";
 
 const white = "#FFFFFF";
 const black = "#000000";
@@ -52,6 +53,9 @@ const App = () => {
       }),
     [prefersDarkMode]
   );
+  useEffect(() => {
+    store.dispatch(getProfile());
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
@@ -73,5 +77,4 @@ const App = () => {
     </ThemeProvider>
   );
 };
-
 export default App;

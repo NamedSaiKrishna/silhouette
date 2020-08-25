@@ -1,27 +1,60 @@
 import {
-  SET_BACKGROUND_PICTURE,
-  SET_PROJECTS,
-  SET_EDUCATION,
-  SET_EXPERIENCE,
-  SET_USER_DETAIL,
-  SET_SKILLS,
-  SET_HANDLES,
   LOADING_DATA,
   SET_ERRORS,
   CLEAR_ERRORS,
   FORM_SUBMITTED,
+  SET_PROFILE,
 } from "./types.js";
 
 const initialState = {
   loading: false,
-  bacground_picture: {},
-  projects: [],
-  education: [],
-  experience: [],
-  user_detail: {},
-  skills: [],
-  handles: [],
   errors: null,
+  profile: {
+    background_picture: { image: "" },
+    user_detail: {
+      name: "",
+      email: "",
+      address: "",
+      description: "",
+      image: "",
+    },
+    education: [
+      {
+        location: "",
+        college_name: "",
+        college_link: "",
+        degree: {
+          name: "",
+        },
+      },
+    ],
+    experiences: [
+      {
+        location: "",
+        company_name: "",
+        company_link: "",
+        designation: {
+          name: "",
+        },
+      },
+    ],
+    projects: [
+      {
+        title: "",
+        used_languages: "",
+        description: "",
+        site_link: "",
+        github_repo: "",
+      },
+    ],
+    skills: [{ name: "", image: "" }],
+    handles: [
+      {
+        name: "",
+        site_link: "",
+      },
+    ],
+  },
   form_submitted: false,
 };
 
@@ -32,46 +65,10 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       };
-    case SET_BACKGROUND_PICTURE:
+    case SET_PROFILE:
       return {
         ...state,
-        bacground_picture: action.payload,
-        loading: false,
-      };
-    case SET_PROJECTS:
-      return {
-        ...state,
-        projects: action.payload,
-        loading: false,
-      };
-    case SET_EDUCATION:
-      return {
-        ...state,
-        education: action.payload,
-        loading: false,
-      };
-    case SET_EXPERIENCE:
-      return {
-        ...state,
-        experience: action.payload,
-        loading: false,
-      };
-    case SET_USER_DETAIL:
-      return {
-        ...state,
-        user_detail: action.payload,
-        loading: false,
-      };
-    case SET_SKILLS:
-      return {
-        ...state,
-        skills: action.payload,
-        loading: false,
-      };
-    case SET_HANDLES:
-      return {
-        ...state,
-        handles: action.payload,
+        profile: action.payload,
         loading: false,
       };
     case SET_ERRORS:

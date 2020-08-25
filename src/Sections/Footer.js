@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 //MUI
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -13,7 +13,6 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 //Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getHandles } from "../redux/DataActions";
 
 function Copyright() {
   return (
@@ -60,10 +59,9 @@ function iconFunc(h) {
 }
 
 const Footer = (props) => {
-  const { getHandles, handles } = props;
-  useEffect(() => {
-    getHandles();
-  }, [getHandles]);
+  const {
+    profile: { handles },
+  } = props;
   const classes = useStyles();
   return (
     <div className={classes.section}>
@@ -78,16 +76,13 @@ const Footer = (props) => {
     </div>
   );
 };
+
 Footer.propTypes = {
-  handles: PropTypes.array.isRequired,
-  getHandles: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  handles: state.data.handles,
+  profile: state.data.profile,
 });
-const mapDispatchToProps = {
-  getHandles,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default connect(mapStateToProps)(Footer);

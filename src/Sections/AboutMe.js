@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 //MUI
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Skeleton from "@material-ui/lab/Skeleton";
+
 //Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getUserDetails } from "../redux/DataActions";
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -40,23 +41,27 @@ const useStyles = makeStyles((theme) => ({
 
 const AboutMe = (props) => {
   const classes = useStyles();
-  const { getUserDetails, user_detail } = props;
-  useEffect(() => {
-    getUserDetails();
-  }, [getUserDetails]);
+  const {
+    profile: { user_detail },
+    loading,
+  } = props;
   return (
     <div className={classes.section} id="about">
       <Grid container spacing={3}>
         <Grid item sm={6}>
-          <div className={classes.am}>
-            <div className="image-wrapper">
-              <img
-                src={user_detail.image}
-                alt="profile_pic"
-                className="image"
-              />
+          {loading ? (
+            <Skeleton variant="rect" height={400} />
+          ) : (
+            <div className={classes.am}>
+              <div className="image-wrapper">
+                <img
+                  src={user_detail.image}
+                  alt="profile_pic"
+                  className="image"
+                />
+              </div>
             </div>
-          </div>
+          )}
         </Grid>
         <Grid item sm={6}>
           <div className={classes.mainTitle}>
@@ -67,7 +72,22 @@ const AboutMe = (props) => {
               Me
             </Typography>
           </div>
-          <Typography>{user_detail.description}</Typography>
+          {loading ? (
+            <Typography variant="body1">
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton width="60%" />
+            </Typography>
+          ) : (
+            <Typography>{user_detail.description}</Typography>
+          )}
         </Grid>
       </Grid>
     </div>
@@ -75,15 +95,13 @@ const AboutMe = (props) => {
 };
 
 AboutMe.propTypes = {
-  user_detail: PropTypes.object.isRequired,
-  getUserDetails: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user_detail: state.data.user_detail,
+  profile: state.data.profile,
+  loading: state.data.loading,
 });
-const mapDispatchToProps = {
-  getUserDetails,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutMe);
+export default connect(mapStateToProps)(AboutMe);

@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
+import Skeleton from "@material-ui/lab/Skeleton";
+
 //Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getEducation, getExperience } from "../redux/DataActions";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -44,11 +45,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Resume = (props) => {
   const classes = useStyles();
-  const { getEducation, getExperience, education, experience } = props;
-  useEffect(() => {
-    getExperience();
-    getEducation();
-  }, [getEducation, getExperience]);
+  const {
+    profile: { education, experiences },
+    loading,
+  } = props;
   return (
     <div className={classes.section} id="resume">
       <div className={classes.mainTitle}>
@@ -65,33 +65,39 @@ const Resume = (props) => {
         </Typography>
         <div>
           <Grid container spacing={3}>
-            {education.map((edu, i) => (
-              <Grid item xs={12} md={6} key={i}>
-                <Paper className={classes.di}>
-                  <Typography
-                    variant="body1"
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    {edu.location}
-                  </Typography>
-                  <Typography variant="h6" gutterBottom color="inherit">
-                    {edu.degree.name}
-                  </Typography>
-                  <div className={classes.list}>
-                    <Typography
-                      component={Link}
-                      variant="subtitle1"
-                      target="_blank"
-                      style={{ textDecoration: "none" }}
-                      href={edu.college_link}
-                    >
-                      {edu.college_name}
-                    </Typography>
-                  </div>
-                </Paper>
-              </Grid>
-            ))}
+            {loading
+              ? [...Array(3)].map((a, i) => (
+                  <Grid item xs={12} md={6} key={i}>
+                    <Skeleton variant="rect" height={160} />
+                  </Grid>
+                ))
+              : education.map((edu, i) => (
+                  <Grid item xs={12} md={6} key={i}>
+                    <Paper className={classes.di}>
+                      <Typography
+                        variant="body1"
+                        color="textSecondary"
+                        gutterBottom
+                      >
+                        {edu.location}
+                      </Typography>
+                      <Typography variant="h6" gutterBottom color="inherit">
+                        {edu.degree.name}
+                      </Typography>
+                      <div className={classes.list}>
+                        <Typography
+                          component={Link}
+                          variant="subtitle1"
+                          target="_blank"
+                          style={{ textDecoration: "none" }}
+                          href={edu.college_link}
+                        >
+                          {edu.college_name}
+                        </Typography>
+                      </div>
+                    </Paper>
+                  </Grid>
+                ))}
           </Grid>
         </div>
       </div>
@@ -101,33 +107,39 @@ const Resume = (props) => {
         </Typography>
         <div>
           <Grid container spacing={3}>
-            {experience.map((exp, i) => (
-              <Grid item xs={12} md={6} key={i}>
-                <Paper className={classes.di}>
-                  <Typography
-                    variant="body1"
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    {exp.location}
-                  </Typography>
-                  <Typography variant="h6" gutterBottom color="inherit">
-                    {exp.designation.name}
-                  </Typography>
-                  <div className={classes.list}>
-                    <Typography
-                      component={Link}
-                      variant="body1"
-                      target="_blank"
-                      style={{ textDecoration: "none" }}
-                      href={exp.company_link}
-                    >
-                      {exp.company_name}
-                    </Typography>
-                  </div>
-                </Paper>
-              </Grid>
-            ))}
+            {loading
+              ? [...Array(3)].map((a, i) => (
+                  <Grid item xs={12} md={6} key={i}>
+                    <Skeleton variant="rect" height={160} />
+                  </Grid>
+                ))
+              : experiences.map((exp, i) => (
+                  <Grid item xs={12} md={6} key={i}>
+                    <Paper className={classes.di}>
+                      <Typography
+                        variant="body1"
+                        color="textSecondary"
+                        gutterBottom
+                      >
+                        {exp.location}
+                      </Typography>
+                      <Typography variant="h6" gutterBottom color="inherit">
+                        {exp.designation.name}
+                      </Typography>
+                      <div className={classes.list}>
+                        <Typography
+                          component={Link}
+                          variant="body1"
+                          target="_blank"
+                          style={{ textDecoration: "none" }}
+                          href={exp.company_link}
+                        >
+                          {exp.company_name}
+                        </Typography>
+                      </div>
+                    </Paper>
+                  </Grid>
+                ))}
           </Grid>
         </div>
       </div>
@@ -136,19 +148,13 @@ const Resume = (props) => {
 };
 
 Resume.propTypes = {
-  getEducation: PropTypes.func.isRequired,
-  getExperience: PropTypes.func.isRequired,
-  education: PropTypes.array.isRequired,
-  experience: PropTypes.array.isRequired,
+  profile: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  education: state.data.education,
-  experience: state.data.experience,
+  profile: state.data.profile,
+  loading: state.data.loading,
 });
-const mapDispatchToProps = {
-  getEducation,
-  getExperience,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Resume);
+export default connect(mapStateToProps)(Resume);

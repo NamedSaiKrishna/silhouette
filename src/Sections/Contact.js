@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -7,11 +7,12 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 //Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getUserDetails, postResponses, closeForm } from "../redux/DataActions";
+import { postResponses, closeForm } from "../redux/DataActions";
 
 const useStyles = makeStyles((theme) => ({
   element: {
@@ -41,12 +42,12 @@ const useStyles = makeStyles((theme) => ({
 const Contact = (props) => {
   const classes = useStyles();
   const {
-    getUserDetails,
-    user_detail,
+    profile: { user_detail },
     postResponses,
     errors,
     form_submitted,
     closeForm,
+    loading,
   } = props;
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -60,9 +61,6 @@ const Contact = (props) => {
     };
     postResponses(body);
   };
-  useEffect(() => {
-    getUserDetails();
-  }, [getUserDetails]);
   return (
     <div className={classes.section} id="contact">
       <div className={classes.mainTitle}>
@@ -147,15 +145,25 @@ const Contact = (props) => {
           <Typography variant="caption" color="secondary">
             EMAIL
           </Typography>
-          <Typography variant="body1" className={classes.element}>
-            {user_detail.email}
-          </Typography>
+          {loading ? (
+            <Typography variant="body2">
+              <Skeleton /> <Skeleton />
+              <Skeleton width="60%" />
+            </Typography>
+          ) : (
+            <Typography> {user_detail.email}</Typography>
+          )}
           <Typography variant="caption" color="secondary">
             ADDRESS
           </Typography>
-          <Typography variant="body1" className={classes.element}>
-            {user_detail.address}
-          </Typography>
+          {loading ? (
+            <Typography variant="body2">
+              <Skeleton /> <Skeleton />
+              <Skeleton width="60%" />
+            </Typography>
+          ) : (
+            <Typography> {user_detail.address}</Typography>
+          )}
         </Grid>
       </Grid>
     </div>
@@ -163,19 +171,19 @@ const Contact = (props) => {
 };
 
 Contact.propTypes = {
-  user_detail: PropTypes.object.isRequired,
-  getUserDetails: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
   postResponses: PropTypes.func.isRequired,
   closeForm: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user_detail: state.data.user_detail,
+  profile: state.data.profile,
+  loading: state.data.loading,
   errors: state.data.errors,
   form_submitted: state.data.form_submitted,
 });
 const mapDispatchToProps = {
-  getUserDetails,
   postResponses,
   closeForm,
 };
