@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e0ea1c7689178b614ac2b74b329a46be",
+    "revision": "ce26ed3eaf7695158a3cdbb566ed7e47",
     "url": "/silhouette/index.html"
   },
   {
