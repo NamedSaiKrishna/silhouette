@@ -15,7 +15,7 @@ const reducers = combineReducers({
 const store = createStore(
   reducers,
   initialState,
-  applyMiddleware(...middleware)
+  compose(applyMiddleware(...middleware))
 );
 
 export default store;

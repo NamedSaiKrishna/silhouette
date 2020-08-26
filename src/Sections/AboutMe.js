@@ -55,6 +55,7 @@ const AboutMe = (props) => {
             <div className={classes.am}>
               <div className="image-wrapper">
                 <img
+                  async
                   src={user_detail.image}
                   alt="profile_pic"
                   className="image"
