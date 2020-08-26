@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/silhouette/static/css/main.fa2afbe4.chunk.css",
-    "main.js": "/silhouette/static/js/main.df29f3d1.chunk.js",
-    "main.js.map": "/silhouette/static/js/main.df29f3d1.chunk.js.map",
+    "main.js": "/silhouette/static/js/main.6016efc3.chunk.js",
+    "main.js.map": "/silhouette/static/js/main.6016efc3.chunk.js.map",
     "runtime-main.js": "/silhouette/static/js/runtime-main.63ee9eb0.js",
     "runtime-main.js.map": "/silhouette/static/js/runtime-main.63ee9eb0.js.map",
-    "static/js/2.c95152ef.chunk.js": "/silhouette/static/js/2.c95152ef.chunk.js",
-    "static/js/2.c95152ef.chunk.js.map": "/silhouette/static/js/2.c95152ef.chunk.js.map",
+    "static/js/2.a711415f.chunk.js": "/silhouette/static/js/2.a711415f.chunk.js",
+    "static/js/2.a711415f.chunk.js.map": "/silhouette/static/js/2.a711415f.chunk.js.map",
     "index.html": "/silhouette/index.html",
-    "precache-manifest.0c13933a603d03fc605ebd8cad103907.js": "/silhouette/precache-manifest.0c13933a603d03fc605ebd8cad103907.js",
+    "precache-manifest.448b28417f497bf511931e47cbec0a71.js": "/silhouette/precache-manifest.448b28417f497bf511931e47cbec0a71.js",
     "service-worker.js": "/silhouette/service-worker.js",
     "static/css/main.fa2afbe4.chunk.css.map": "/silhouette/static/css/main.fa2afbe4.chunk.css.map",
-    "static/js/2.c95152ef.chunk.js.LICENSE.txt": "/silhouette/static/js/2.c95152ef.chunk.js.LICENSE.txt"
+    "static/js/2.a711415f.chunk.js.LICENSE.txt": "/silhouette/static/js/2.a711415f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.63ee9eb0.js",
-    "static/js/2.c95152ef.chunk.js",
+    "static/js/2.a711415f.chunk.js",
     "static/css/main.fa2afbe4.chunk.css",
-    "static/js/main.df29f3d1.chunk.js"
+    "static/js/main.6016efc3.chunk.js"
   ]
 }
